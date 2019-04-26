@@ -37,7 +37,8 @@ public class Game extends Application {
 		try {
 
 			FXMLLoader loader = new FXMLLoader();
-			loader = new FXMLLoader(getClass().getResource("/game/app/view/GameBorder.fxml"));
+			loader = new FXMLLoader(getClass()
+					.getResource("/game/app/view/GameBorder.fxml"));
 			GameBorderPane = (BorderPane) loader.load();
 			Scene scene = new Scene(GameBorderPane);
 			primaryStage.setScene(scene);
@@ -80,5 +81,9 @@ public class Game extends Application {
 		return this.sudoku;
 	}
 
+	public int GetGameSize()
+	{
+		return GBC.GetGameSize();
+	}
 
 }

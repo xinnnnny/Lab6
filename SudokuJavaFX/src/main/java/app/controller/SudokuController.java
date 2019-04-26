@@ -12,6 +12,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -41,11 +42,18 @@ public class SudokuController implements Initializable {
 
 	@FXML
 	private void ButtonPush(ActionEvent event) {
-		BuildGrid();
+		
+ 
+			BuildGrid();
+	 
+		 
 	}
 
 	private void BuildGrid() {
-		Sudoku s = game.StartSudoku(9);
+		
+ 
+		
+		Sudoku s = game.StartSudoku(game.GetGameSize());
 
 		vboxCenter.getChildren().clear();
 		GridPane gridPane = new GridPane();
