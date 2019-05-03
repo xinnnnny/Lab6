@@ -53,7 +53,8 @@ public class SudokuController implements Initializable {
 		
  
 		
-		Sudoku s = game.StartSudoku(game.GetGameSize());
+		
+		Sudoku s = game.StartSudoku(game.GetGameSize(), game.GetGameDifficulty());
 
 		vboxCenter.getChildren().clear();
 		GridPane gridPane = new GridPane();
@@ -101,6 +102,10 @@ public class SudokuController implements Initializable {
 	}
 
 	private Image GetImage(int iValue) {
+		
+		if (iValue == 0)
+			return null;
+		
 		InputStream is = getClass().getClassLoader().getResourceAsStream("img/" + iValue + ".png");
 		return new Image(is);
 	}

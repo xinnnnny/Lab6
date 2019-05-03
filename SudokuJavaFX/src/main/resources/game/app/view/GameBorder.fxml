@@ -36,6 +36,17 @@
                   <RadioMenuItem mnemonicParsing="false" selected="true" text="9" toggleGroup="$tglSudokuSize" />
               </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Difficulty">
+               <items>
+                  <RadioMenuItem mnemonicParsing="false" selected="true" text="Easy">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="tglDifficulty" />
+                     </toggleGroup>
+                  </RadioMenuItem>
+                  <RadioMenuItem mnemonicParsing="false" text="Medium" toggleGroup="$tglDifficulty" />
+                  <RadioMenuItem mnemonicParsing="false" text="Hard" toggleGroup="$tglDifficulty" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
    </top>
