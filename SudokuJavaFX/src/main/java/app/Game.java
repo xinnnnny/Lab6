@@ -21,6 +21,10 @@ public class Game extends Application {
 	private Sudoku sudoku = null;
 
 
+	public void setStageWidth(int iWidth) {
+		primaryStage.setWidth(iWidth);
+	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -90,6 +94,9 @@ public class Game extends Application {
 	public eGameDifficulty GetGameDifficulty()
 	{
 		return GBC.GetGameDifficulty();
+	}
+	public boolean getShowHints() {
+		return this.GBC.getShowHints();
 	}
 
 }

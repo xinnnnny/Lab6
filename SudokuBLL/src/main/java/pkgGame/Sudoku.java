@@ -54,6 +54,8 @@ public class Sudoku extends LatinSquare implements Serializable {
 
 	private eGameDifficulty eGD;
 	
+	private int iMistakesCnt = 0;
+	
 	private HashMap<Integer, SudokuCell> cells = new HashMap<Integer, SudokuCell>();
 
 	/**
@@ -70,14 +72,8 @@ public class Sudoku extends LatinSquare implements Serializable {
 	 * @throws Exception if the iSize given doesn't have a whole number square root
 	 */
 	
-	public Sudoku(int iSize, eGameDifficulty eGD) throws Exception
-	{
-		this(iSize);
-		this.eGD = eGD;
-		RemoveZeros();
-		
-	}
-	public Sudoku(int iSize) throws Exception {
+ 
+	public Sudoku(int iSize, eGameDifficulty eGD) throws Exception {
 
 		this.iSize = iSize;
 
@@ -96,7 +92,7 @@ public class Sudoku extends LatinSquare implements Serializable {
 		fillRemaining(this.cells.get(Objects.hash(0, iSqrtSize)));
 
 		
-		this.eGD  = eGameDifficulty.HARD;
+		this.eGD  = eGD;
 		RemoveZeros();
 	}
 
@@ -671,6 +667,178 @@ public class Sudoku extends LatinSquare implements Serializable {
 		return iCnt;
 	}
 
+	/**
+	 * bFirstRow - return True if it's the first row of the puzzle
+	 * 
+	 * @version 1.5
+	 * @since Lab #5
+	 * @param c
+	 * @return
+	 */
+	public boolean bFirstRow(Cell c) {
+		if (c.getiRow() == 0)
+			return true;
+		else
+			return false;
+	}
+
+	/**
+	 * bFirstCol - return True if it's the first column in the puzzle
+	 * 
+	 * @version 1.5
+	 * @since Lab #5
+	 * @param c
+	 * @return
+	 */
+	public boolean bFirstCol(Cell c) {
+		if (c.getiCol() == 0)
+			return true;
+		else
+			return false;
+	}
+
+	/**
+	 * bFirstCell - return True if it's the first cell in the puzzle
+	 * 
+	 * @version 1.5
+	 * @since Lab #5
+	 * @param c
+	 * @return
+	 */
+	public boolean bFirstCell(Cell c) {
+
+		if ((bFirstRow(c)) && (bFirstCol(c)))
+			return true;
+		else
+			return false;
+	}
+
+	/**
+	 * bLastRow - return True if it's the last row in the puzzle
+	 * 
+	 * @version 1.5
+	 * @since Lab #5
+	 * @param c
+	 * @return
+	 */
+	public boolean bLastRow(Cell c) {
+		if (c.getiRow() + 1 == this.iSize)
+			return true;
+		else
+			return false;
+	}
+
+	/**
+	 * bLastCol - return True if it's the last column in the puzzle
+	 * 
+	 * @version 1.5
+	 * @since Lab #5
+	 * @param c
+	 * @return
+	 */
+	public boolean bLastCol(Cell c) {
+		if (c.getiCol() + 1 == this.iSize)
+			return true;
+		else
+			return false;
+	}
+
+	/**
+	 * bLastCell - return True if it's the last cell in the puzzle
+	 * 
+	 * @version 1.5
+	 * @since Lab #5
+	 * @param c
+	 * @return
+	 */
+	public boolean bLastCell(Cell c) {
+		if ((bLastRow(c)) && (bLastCol(c)))
+
+			return true;
+		else
+			return false;
+	}
+	/**
+	 * bRegionRow - return True if it's the last row in the region
+	 * 
+	 * @version 1.5
+	 * @since Lab #5
+	 * @param c
+	 * @return
+	 */
+	public boolean bRegionRow(Cell c) {
+		if ((c.getiRow() + 1) % this.iSqrtSize == 0)
+
+			return true;
+		else
+			return false;
+	}
+	
+	/**
+	 * bRegionCol - return True if it's the last column in the region
+	 * 
+	 * @version 1.5
+	 * @since Lab #5
+	 * @param c
+	 * @return
+	 */
+	public boolean bRegionCol(Cell c) {
+		if ((c.getiCol() + 1) % this.iSqrtSize == 0)
+			return true;
+		else
+			return false;
+	}
+	
+	/**
+	 * getiMistakesCnt - getter to determine # of mistakes
+	 * 
+	 * @version 1.6
+	 * @since Lab #6
+	 */
+	public int getiMistakesCnt() {
+		return iMistakesCnt;
+	}
+	
+	/**
+	 * getMistakesMessage - return a nicely formated message
+	 * 
+	 * @version 1.6
+	 * @since Lab #6
+	 */	
+	public String getMistakesMessage()
+	{
+		return this.getiMistakesCnt() + "/" + this.eGD.getiMaxMistakes() + " mistakes";
+	}
+
+	/**
+	 * AddMistake - Add a mistake to the counter
+	 * 
+	 * @version 1.6
+	 * @since Lab #6
+	 */
+	public void AddMistake()
+	{
+		this.iMistakesCnt++;
+	}
+	
+	/**
+	 * isPuzzleMaxMistakes - Check to see if the current count of mistakes is larger than the maximum mistakes allowed for puzzle type
+	 * 
+	 * @version 1.6
+	 * @since Lab #6
+	 */
+	
+	public boolean isPuzzleMaxMistakes()
+	{
+		if (this.iMistakesCnt > this.eGD.getiMaxMistakes())
+		{
+			return true;
+		}
+		return false;
+	}
+
+	
+	
 	/**
 	 * Cell - private class that handles possible remaining values
 	 * 

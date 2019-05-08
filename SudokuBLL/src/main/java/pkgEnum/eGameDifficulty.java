@@ -6,9 +6,10 @@ import java.util.Map;
 
 public enum eGameDifficulty {
 
-	EASY(10), MEDIUM(30), HARD(60);
+	EASY(10,9), MEDIUM(30,7), HARD(60,5);
 	
 	private int iPctRemove;
+	private int iMaxMistakes;
 	
 	private static final Map<Integer, eGameDifficulty> 
 			lookup = new LinkedHashMap<Integer, eGameDifficulty>();
@@ -19,15 +20,21 @@ public enum eGameDifficulty {
 		}
 	}
 	
-	private eGameDifficulty(int iPctRemove)
+	private eGameDifficulty(int iPctRemove, int iMaxMistakes)
 	{
 		this.iPctRemove = iPctRemove;
+		this.iMaxMistakes = iMaxMistakes;
 	}
 
 	private int getiPctRemove() {
 		return iPctRemove;
 	}
 	
+	
+	public int getiMaxMistakes() {
+		return iMaxMistakes;
+	}
+
 	public static eGameDifficulty get(int iPctRemove) {
 
 		Iterator it = lookup.entrySet().iterator();
