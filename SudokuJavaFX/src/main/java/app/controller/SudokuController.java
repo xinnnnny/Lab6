@@ -266,6 +266,7 @@ public class SudokuController implements Initializable {
 				// Fire this method as something is being dragged over a cell
 				// I'm checking the cell value... if it's not zero... don't let it be dropped
 				// (show the circle-with-line-through)
+				
 				paneTarget.setOnDragOver(new EventHandler<DragEvent>() {
 					public void handle(DragEvent event) {
 						if (event.getGestureSource() != paneTarget && event.getDragboard().hasContent(myFormat)) {
@@ -277,7 +278,7 @@ public class SudokuController implements Initializable {
 						event.consume();
 					}
 				});
-
+				
 				// Fire this method as something is entering the item being dragged
 				paneTarget.setOnDragEntered(new EventHandler<DragEvent>() {
 					public void handle(DragEvent event) {
@@ -297,7 +298,8 @@ public class SudokuController implements Initializable {
 						event.consume();
 					}
 				});
-
+				
+				
 				paneTarget.setOnDragExited(new EventHandler<DragEvent>() {
 					public void handle(DragEvent event) {
 						SudokuStyler.RemoveGridStyling(gridPaneSudoku);
@@ -333,7 +335,8 @@ public class SudokuController implements Initializable {
 								
 								//TODO: Set the message for mistakes
 								if (game.getShowHints()) {
-
+									if (!s.isValidValue(CellTo.getiRow(), CellTo.getiCol(), CellFrom.getiCellValue())) {
+										this.handle(event);
 								}
 							}
 
